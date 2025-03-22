@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import useAnimationFrame from "~/hooks/useAnimationFrame";
 
+
 export default function Hero() {
     const cur = useRef({ x: 0, y: 0 });
-    const bg = useRef(null);
+    const bg : any = useRef(null);
 
     useAnimationFrame(() => {
         const x = cur.current.x * 0.3;
@@ -18,9 +19,9 @@ export default function Hero() {
     }
 
     useEffect(() => {
-        bg.current.addEventListener('mousemove', sync_cur_pos);
+        window.addEventListener('mousemove', sync_cur_pos);
 
-        return () => bg.current.removeEventListener('mousemove', sync_cur_pos);
+        return () => window.removeEventListener('mousemove', sync_cur_pos);
     }, []);
 
     return (
@@ -29,7 +30,7 @@ export default function Hero() {
             <video ref={bg} src="hero.mp4"
                    className='min-h-[calc(100%+220px)] min-w-[calc(100%+520px)]
                               absolute -top-[110px] -left-[260px] object-cover'
-                   muted loop playsInline/>
+                   autoPlay muted loop playsInline/>
         </div>
         {/* <div className='sticky h-lvh w-full overflow-clip'>
             <video ref={bg} src="https://redbarrelsgames.com/wp-content/uploads/2024/05/outlast_maison_test_V03_2.5k.mp4"
@@ -37,5 +38,6 @@ export default function Hero() {
                               h-[calc(100%+560px)] w-[calc(100%+540px)]
                               -top-[110px]' width={2560} height={1440} muted loop playsInline disableRemotePlayback />
         </div> */}
+
     </section>);
 }
